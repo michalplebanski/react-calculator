@@ -1,26 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {Component} from 'react';
+
+import InputValue from './InputValue';
+//import ButtonsTable from './ButtonsTable';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+
+  state = {
+    value: '',
+  }
+
+  handleInput = (e) => {
+    const number = e.target.validity.valid ? e.target.value : this.state.value;
+    this.setState({
+        value: number,
+    })
+}
+
+  render() {
+
+    const pattern = '[0-9]*';
+
+    return (
+      <div className="App">
+        <InputValue 
+          changeInput={this.handleInput}
+          valueInput={this.state.value}
+          patternInput={pattern}
+        />
+      </div>
+    );
+  }
 }
 
 export default App;
